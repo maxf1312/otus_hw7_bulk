@@ -1,5 +1,4 @@
 #include <iostream>
-#include <map>
 
 #include "vers.h"
 #include "bulk.h"
@@ -13,8 +12,11 @@ int main(int argc, char const* argv[])
 	try
 	{
 		Options options;
-		parse_command_line(argc, argv, options);
-				
+		if (!parse_command_line(argc, argv, options))
+			return 1;
+		
+		IProcessorPtr_t processor = create_processor(options);
+		processor->process();	
 	}	
 	catch(const std::exception &e)
 	{
