@@ -12,10 +12,15 @@ configure_file(version.h.in version.h)
 
 add_definitions(-D USE_PRETTY)
 
-add_executable(bulk main.cpp)
+add_executable(bulk main.cpp bulk.cpp)
 add_library(libbulk vers.cpp)
 
 set_target_properties(bulk PROPERTIES
+    CXX_STANDARD 14
+    CXX_STANDARD_REQUIRED ON
+)
+
+set_target_properties(libbulk PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
@@ -27,6 +32,22 @@ target_include_directories(bulk
 target_include_directories(libbulk
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
+
+find_package(Boost REQUIRED COMPONENTS program_options)
+if( Boost_FOUND )
+    message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
+    message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
+    message(status "** Boost Libraries: ${Boost_LIBRARIES}")
+
+    set_target_properties(bulk PROPERTIES
+        COMPILE_DEFINITIONS BOOST_ALL_DYN_LINK
+        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+    )
+
+    target_link_libraries(bulk PRIVATE
+        ${Boost_LIBRARIES}
+    )
+endif()
 
 target_link_libraries(bulk PRIVATE
     libbulk
