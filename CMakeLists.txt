@@ -12,7 +12,7 @@ configure_file(version.h.in version.h)
 
 add_definitions(-D USE_PRETTY)
 
-add_executable(bulk main.cpp bulk.cpp)
+add_executable(bulk main.cpp bulk.cpp bulk_utils.cpp)
 add_library(libbulk vers.cpp)
 
 set_target_properties(bulk PROPERTIES

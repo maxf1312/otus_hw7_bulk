@@ -1,58 +1,33 @@
 #include <iostream>
-#include <boost/program_options.hpp>
+#include <map>
+
 #include "bulk.h"
 
 namespace otus_hw7{
-    namespace po = boost::program_options;
-   
-    void show_help(po::options_description const& desc)
+    using command_data_t = std::string;
+    class SimpleCommand : public ICommand
     {
-        std::cout << desc << std::endl;
-    }
-
-    bool parse_command_line(int argc, const char* argv[], Options& parsed_options)
-    {
-        constexpr const char* const OPTION_NAME_HELP = "help"; 
-        constexpr const char* const OPTION_NAME_CHUNK_SIZE = "chunk_size"; 
-        parsed_options = {false, 0};
-        
-        auto check_size = [](const size_t& sz) 
-                          { 
-                            if( sz < 1 ) throw po::invalid_option_value(OPTION_NAME_CHUNK_SIZE); 
-                          };
-        po::options_description desc("Аргументы командной строки");
-        desc.add_options()
-            (OPTION_NAME_HELP, po::bool_switch(&parsed_options.show_help), "Отображение справки")
-            (OPTION_NAME_CHUNK_SIZE, po::value<size_t>(&parsed_options.cmd_chunk_sz)->notifier(check_size), "Размер блока команд");
-
-        po::positional_options_description pos_desc;
-        pos_desc.add(OPTION_NAME_CHUNK_SIZE, -1);
-
-        po::variables_map vm;
-        po::store(po::command_line_parser(argc, argv).options(desc).positional(pos_desc).run(), vm);
-        po::notify(vm);
-
-        size_t sz = vm.size();
-        bool not_need_exit = true;
-        if( sz < 2 || !vm.count(OPTION_NAME_CHUNK_SIZE) )
-            parsed_options.show_help = true, 
-            not_need_exit = false;
-        
-        if( parsed_options.show_help )
-            show_help(desc);
-        
-        return not_need_exit;
-    }
+    public:
+        SimpleCommand(const command_data_t& cmd) : cmd_(cmd) {}
+        virtual void execute(ICommandContext& ctx) override;
+    private:
+        command_data_t cmd_;
+    };
 
     class InputParser : public IInputParser
     {
     public:
         InputParser(size_t chunk_size, istream& is) : is_(is), chunk_size_(chunk_size), last_tok_{}, last_stat_{} { }
-        Status   read_next_command(command_t& cmd) override
+        Status   read_next_command(ICommandPtr_t& cmd) override
         {
             read_command();
-            return get_last_command(cmd);
+            command_data_t cmd_data;
+            Status st = get_last_command_data(cmd_data);
+            cmd = create_command(cmd_data);
+            return st;
         }
+        
+        Status   read_next_bulk(ICommandQueue& cmd_queue) override;         
 
     private:
         enum class Token : uint8_t
@@ -64,14 +39,43 @@ namespace otus_hw7{
         };
 
         istream&   read_command();
-        Status     get_last_command(command_t& cmd) const { cmd = last_cmd_; return last_stat_; }
+        Status     get_last_command_data(std::string& cmd) const { cmd = last_cmd_; return last_stat_; }
         void       set_status(Status new_st);
+        ICommandPtr_t create_command(const std::string cmd) const { return ICommandPtr_t{new SimpleCommand(cmd)}; }
         istream&   is_;
         size_t     chunk_size_, cmd_count_ = 0, block_count_ = 0;
-        command_t  last_cmd_; 
-        Token      last_tok_;       
-        Status     last_stat_;       
+        ICommandPtr_t  p_last_cmd_; 
+
+        command_data_t  last_cmd_; 
+        Token        last_tok_;       
+        Status       last_stat_;       
     };
+
+    IInputParser::Status   InputParser::read_next_bulk(ICommandQueue& cmd_queue)
+    {
+		Status st{};
+        for(bool end_of_work = false; !end_of_work;)
+        {
+            ICommandPtr_t cmd;
+			switch( st = read_next_command(cmd) )
+			{
+				default:
+				case Status::kIgnore:
+					break;
+				case Status::kReading:
+					cmd_queue.push(std::move(cmd));
+					break;
+				case Status::kReady:
+                    end_of_work = true;
+                    break;
+				case Status::kStop:
+                    end_of_work = true;
+					cmd_queue.reset();
+					break;
+			}
+		}
+        return st;
+    }    
 
     void     InputParser::set_status(Status new_st)
     {
@@ -154,70 +158,78 @@ namespace otus_hw7{
     class CommandQueue : public ICommandQueue
     {
     public:
-        void     push(command_t const& cmd) override { q_.push(cmd); }
+        void     push(ICommandPtr_t cmd) override { q_.push(std::move(cmd)); }
+        bool     pop(ICommandPtr_t& cmd) override;
         void     reset() override { while(!q_.empty()) q_.pop(); }
-        void     exec( ICommandExecutor& executor ) override;
+        size_t   size() const override { return q_.size(); }
+
     private:
-        using  queue_t = std::queue<command_t>;
+        using  queue_t = std::queue<ICommandPtr_t>;
         queue_t q_;
-        ICommandContext ctx_;
     };
    
-    void     CommandQueue::exec(ICommandExecutor& executor)
+    bool     CommandQueue::pop(ICommandPtr_t& cmd) 
     {
-        ctx_ = { q_.size(), 0 };
-        for( ; !q_.empty() ; ++ctx_.cmd_idx_)
-        {
-            command_t cmd = q_.front();
-            q_.pop();
-            executor.execute_cmd(cmd, ctx_);
-        }    
+        if( q_.empty() )
+            return false;
+        cmd = std::move(q_.front());
+        q_.pop();
+        return true;
     }
 
-    class CommandExecutor : public ICommandExecutor
+    class QueueExecutor : public IQueueExecutor
     {
     public:    
-        CommandExecutor(ostream& os) : os_(os) { }
-        void execute_cmd(const command_t& cmd, ICommandContext& ctx) override;
-    private:
-        ostream& os_;
+        QueueExecutor()  { }
+        void execute(ICommandQueue& q, ICommandContext& ctx) override;
     };
 
-    void CommandExecutor::execute_cmd(const command_t& cmd, ICommandContext& ctx)
+    void QueueExecutor::execute(ICommandQueue& q, ICommandContext& ctx)
     {
-        os_ << (!ctx.cmd_idx_ ? "bulk: ": ", ") << cmd; 
+        ICommandPtr_t cmd;
+        for( ; q.pop(cmd) ; ++ctx.cmd_idx_)
+        {
+            cmd->execute(ctx);
+        } 
+    }
+
+    void SimpleCommand::execute(ICommandContext& ctx)
+    {
+        ctx.os_ << (!ctx.cmd_idx_ ? "bulk: ": ", ") << cmd_; 
         if( ctx.bulk_cnt_ - ctx.cmd_idx_ < 2 )
-            os_ << std::endl; 
+            ctx.os_ << std::endl; 
     }
 
     class Processor : public IProcessor
     {
     public:
-        Processor(IInputParserPtr_t parser, ICommandQueuePtr_t cmd_queue, ICommandExecutorPtr_t executor) :
-        parser_(std::move(parser)), cmd_queue_(std::move(cmd_queue)), executor_(std::move(executor)){}
+        Processor(IInputParserPtr_t parser, ICommandQueuePtr_t cmd_queue, IQueueExecutorPtr_t executor) :
+        parser_(std::move(parser)), cmd_queue_(std::move(cmd_queue)), executor_(std::move(executor)), 
+        ctx_(std::make_unique<ICommandContext>(0, 0, std::cout)) {}
         void process() override;
     private:
+        void     exec_queue( );
+
         IInputParserPtr_t parser_;
         ICommandQueuePtr_t cmd_queue_; 
-        ICommandExecutorPtr_t executor_;
+        IQueueExecutorPtr_t executor_;
+        ICommandContextPtr_t ctx_;
     };
 
     void Processor::process()
     {
 		for(bool end_of_work = false; !end_of_work;)
         {
-            command_t cmd;
-			IInputParser::Status st = parser_->read_next_command(cmd);
+			IInputParser::Status st = parser_->read_next_bulk(*cmd_queue_);
 			switch( st )
 			{
 				default:
 				case IInputParser::Status::kIgnore:
 					break;
 				case IInputParser::Status::kReading:
-					cmd_queue_->push(cmd);
 					break;
 				case IInputParser::Status::kReady:
-					cmd_queue_->exec(*executor_);
+					exec_queue();
 					break;
 				case IInputParser::Status::kStop:
                     end_of_work = true;
@@ -227,10 +239,17 @@ namespace otus_hw7{
 		}
     }
 
+    void    Processor::exec_queue( )
+    {
+        ctx_->bulk_cnt_ = cmd_queue_->size(); 
+        ctx_->cmd_idx_ = 0;
+        
+        executor_->execute(*cmd_queue_, *ctx_);
+    }
 
     IProcessorPtr_t create_processor(Options& options)
     {
-        return IProcessorPtr_t{new Processor(create_parser(options), create_command_queue(), create_command_executor() ) };
+        return IProcessorPtr_t{new Processor(create_parser(options), create_command_queue(), create_queue_executor() ) };
     }
     
     IInputParserPtr_t create_parser(Options& options)
@@ -240,11 +259,11 @@ namespace otus_hw7{
     
     ICommandQueuePtr_t create_command_queue()
     {
-        return ICommandQueuePtr_t{new CommandQueue};
+        return ICommandQueuePtr_t{ new CommandQueue };
     }
 
-    ICommandExecutorPtr_t create_command_executor()
+    IQueueExecutorPtr_t create_queue_executor()
     {
-        return ICommandExecutorPtr_t{ new CommandExecutor(std::cout) };
+        return IQueueExecutorPtr_t{ new QueueExecutor() };
     }
 };
