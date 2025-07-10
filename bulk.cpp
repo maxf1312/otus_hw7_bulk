@@ -52,7 +52,6 @@ namespace otus_hw7{
         size_t     chunk_size_, cmd_count_ = 0, block_count_ = 0;
 
         ICommandCreatorPtr_t cmd_creator_;
-        ICommandPtr_t  p_last_cmd_; 
         command_data_t  last_cmd_; 
         Token        last_tok_;       
         Status       last_stat_;       
@@ -81,26 +80,13 @@ namespace otus_hw7{
         ICommandPtr_t wrapped_cmd_;
     };
 
-    /// @brief Реализация декоратора для сохранения времени создания команды
-    class CommandWithLogTime : public CommandDecorator 
-    {
-    public:
-        time_t created_at_ = std::time(nullptr);
-        CommandWithLogTime(ICommandPtr_t wraped_cmd) : CommandDecorator(std::move(wraped_cmd)) {}
-        virtual void execute(ICommandContext& ctx) override 
-        {
-            CommandDecorator::execute(ctx);
-            ctx.cmd_created_at_ = created_at_;
-        }
-    };
-
     /// @brief Конкретная фабрика команд
     class CommandCreator : public ICommandCreator
     {
     public:
         virtual ICommandPtr_t create_command(const command_data_t&  cmd) const override 
         { 
-            return ICommandPtr_t{new CommandWithLogTime{ICommandPtr_t{new SimpleCommand(cmd)}}}; 
+            return ICommandPtr_t{new SimpleCommand(cmd)}; 
         }
     };
 
@@ -233,7 +219,7 @@ namespace otus_hw7{
         return true;
     }
 
-    /// @brief Реализация исполнителя очереди и в нем же пока исполнитель команд
+    /// @brief Реализация исполнителя очереди
     class QueueExecutor : public IQueueExecutor
     {
     public:    
@@ -294,7 +280,7 @@ namespace otus_hw7{
         {
             CommandExecutorDecorator::execute_cmd(c, ctx);
             init_log(ctx);
-            ICommandContext log_ctx{ctx.bulk_size_, ctx.cmd_idx_, log_};
+            ICommandContext log_ctx{ctx.bulk_size_, ctx.cmd_idx_, log_, ctx.cmd_created_at_};
             c.execute(log_ctx);
         }
     private:
@@ -328,7 +314,7 @@ namespace otus_hw7{
     public:
         Processor(IInputParserPtr_t parser, ICommandQueuePtr_t cmd_queue, IQueueExecutorPtr_t executor) :
         parser_(std::move(parser)), cmd_queue_(std::move(cmd_queue)), executor_(std::move(executor)), 
-        ctx_(std::make_unique<ICommandContext>(0, 0, std::cout)) {}
+        ctx_(std::make_unique<ICommandContext>(0, 0, std::cout, 0)) {}
         void process() override;
     private:
         void     exec_queue( );
@@ -348,7 +334,6 @@ namespace otus_hw7{
 			{
 				default:
 				case IInputParser::Status::kIgnore:
-					break;
 				case IInputParser::Status::kReading:
 					break;
 				case IInputParser::Status::kReady:
@@ -366,6 +351,7 @@ namespace otus_hw7{
     {
         ctx_->bulk_size_ = cmd_queue_->size(); 
         ctx_->cmd_idx_ = 0;
+        ctx_->cmd_created_at_ = cmd_queue_->created_at_;
         ICommandExecutorPtr_t cmd_executor{ new CommandExecutorWithLog(ICommandExecutorPtr_t{ new CommandExecutor() }) };
         executor_->execute(*cmd_queue_, *cmd_executor, *ctx_);
     }

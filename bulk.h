@@ -94,8 +94,8 @@ namespace otus_hw7{
         time_t cmd_created_at_;
 
         virtual ~ICommandContext() = default; 
-        ICommandContext(size_t bulk_size, size_t cmd_idx, ostream& os) 
-            : bulk_size_(bulk_size), cmd_idx_(cmd_idx), os_(os), cmd_created_at_(0) {}
+        ICommandContext(size_t bulk_size, size_t cmd_idx, ostream& os, time_t cmd_created_at) 
+            : bulk_size_(bulk_size), cmd_idx_(cmd_idx), os_(os), cmd_created_at_(cmd_created_at) {}
     };
 
     /// @brief Процессор - управляющий обработкой посредник
