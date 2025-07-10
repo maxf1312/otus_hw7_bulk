@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <memory>
@@ -18,6 +19,7 @@ namespace otus_hw7{
 
 
     struct IQueueExecutor;
+    struct ICommandExecutor;
     struct ICommandContext;
     struct IInputParser;
     struct ICommand;
@@ -25,17 +27,17 @@ namespace otus_hw7{
     struct IProcessor;
 
     using IQueueExecutorPtr_t = std::unique_ptr<IQueueExecutor>;
+    using ICommandExecutorPtr_t = std::unique_ptr<ICommandExecutor>;
     using IInputParserPtr_t = std::unique_ptr<IInputParser>;
     using ICommandPtr_t = std::unique_ptr<ICommand>;
     using ICommandQueuePtr_t = std::unique_ptr<ICommandQueue>;
     using IProcessorPtr_t = std::unique_ptr<IProcessor>;
     using ICommandContextPtr_t = std::unique_ptr<ICommandContext>;
 
-    /**
-         * @brief Интерфейс для разбора ввода и формирования пакетов команд. 
-         *        Формируут пакеты, возвращая сразу данные в ICommandQueue 
-         *          
-         */
+    //---------------------------------------------------------------------------------------------------
+    
+    /// @brief  Парсер для четния, разбора ввода и формирования пакетов команд. 
+    ///         Формирует пакеты, возвращая сразу данные в ICommandQueue 
     struct IInputParser
     {
         /// @brief Статус чтения ввода и готовности к выполнению
@@ -51,8 +53,10 @@ namespace otus_hw7{
         virtual Status   read_next_bulk(ICommandQueue& cmd_queue) = 0;        
     };
 
+    /// @brief Очередь команд. Формируется парсером, затем выполняется исполнителем под управлением процессора.
     struct ICommandQueue
     {
+        time_t   created_at_;
         virtual  ~ICommandQueue() = default;
 
         virtual  void push(ICommandPtr_t cmd) = 0;
@@ -68,33 +72,42 @@ namespace otus_hw7{
         virtual void execute(ICommandContext& ctx) = 0;
     };
 
+    /// @brief Актор, выполняющий команду
+    struct ICommandExecutor
+    {
+        virtual      ~ICommandExecutor() = default;
+        virtual void execute_cmd(ICommand& cmd, ICommandContext& ctx) = 0;
+    };
+
     /// @brief Актор, выполняющий очередь
     struct IQueueExecutor
     {
         virtual      ~IQueueExecutor() = default;
-        virtual void execute(ICommandQueue& cmd_q, ICommandContext& ctx) = 0;
+        virtual void execute(ICommandQueue& cmd_q, ICommandExecutor& cmd_executor, ICommandContext& ctx) = 0;
     };
 
     /// @brief Контекст выполнения команды
     struct ICommandContext
     {
-        size_t bulk_cnt_, cmd_idx_;
+        size_t bulk_size_, cmd_idx_;
         ostream& os_;
+        time_t cmd_created_at_;
 
         virtual ~ICommandContext() = default; 
-        ICommandContext(size_t bulk_cnt, size_t cmd_idx, ostream& os) 
-            : bulk_cnt_(bulk_cnt), cmd_idx_(cmd_idx), os_(os) {}
+        ICommandContext(size_t bulk_size, size_t cmd_idx, ostream& os) 
+            : bulk_size_(bulk_size), cmd_idx_(cmd_idx), os_(os), cmd_created_at_(0) {}
     };
 
+    /// @brief Процессор - управляющий обработкой посредник
     struct IProcessor
     {
         virtual ~IProcessor() = default;
         virtual void process() = 0;
     };
 
+    /// @brief  Фабрика для процессора, сама по настройкам выбирает какой тип процессора создать
+    /// @param options 
+    /// @return Интерфейс созданного объекта  
     IProcessorPtr_t create_processor(Options& options);
-    IInputParserPtr_t create_parser(Options& options);
-    ICommandQueuePtr_t create_command_queue();
-    IQueueExecutorPtr_t create_queue_executor();
 } // otus_hw7
 

@@ -1,23 +1,29 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+
 #include <map>
+
 
 #include "bulk.h"
 
 namespace otus_hw7{
+
     using command_data_t = std::string;
-    class SimpleCommand : public ICommand
+
+    /// @brief Абстрактная фабрика для команды
+    struct ICommandCreator
     {
-    public:
-        SimpleCommand(const command_data_t& cmd) : cmd_(cmd) {}
-        virtual void execute(ICommandContext& ctx) override;
-    private:
-        command_data_t cmd_;
+        virtual ~ICommandCreator() = default;
+        virtual ICommandPtr_t create_command(const command_data_t& cmd_data) const = 0;
     };
+    using ICommandCreatorPtr_t = std::unique_ptr<ICommandCreator>;
 
     class InputParser : public IInputParser
     {
     public:
-        InputParser(size_t chunk_size, istream& is) : is_(is), chunk_size_(chunk_size), last_tok_{}, last_stat_{} { }
+        InputParser(size_t chunk_size, istream& is, ICommandCreatorPtr_t cmd_creator) 
+            : is_(is), chunk_size_(chunk_size), cmd_creator_{std::move(cmd_creator)}, last_tok_{}, last_stat_{} { }
         Status   read_next_command(ICommandPtr_t& cmd) override
         {
             read_command();
@@ -41,19 +47,69 @@ namespace otus_hw7{
         istream&   read_command();
         Status     get_last_command_data(std::string& cmd) const { cmd = last_cmd_; return last_stat_; }
         void       set_status(Status new_st);
-        ICommandPtr_t create_command(const std::string cmd) const { return ICommandPtr_t{new SimpleCommand(cmd)}; }
+        ICommandPtr_t create_command(const command_data_t&  cmd) const { return cmd_creator_->create_command(cmd); }
         istream&   is_;
         size_t     chunk_size_, cmd_count_ = 0, block_count_ = 0;
-        ICommandPtr_t  p_last_cmd_; 
 
+        ICommandCreatorPtr_t cmd_creator_;
+        ICommandPtr_t  p_last_cmd_; 
         command_data_t  last_cmd_; 
         Token        last_tok_;       
         Status       last_stat_;       
     };
 
+    /// @brief Реализация простой команды, выводящей себя в поток
+    class SimpleCommand : public ICommand
+    {
+    public:
+        SimpleCommand(const command_data_t& cmd) : cmd_(cmd) {}
+        virtual void execute(ICommandContext& ctx) override;
+    private:
+        command_data_t cmd_;
+    };
+
+    /// @brief Реализация команды-декоратора
+    class CommandDecorator : public ICommand
+    {
+    public:
+        CommandDecorator(ICommandPtr_t wraped_cmd) : wrapped_cmd_(std::move(wraped_cmd)) {}
+        virtual void execute(ICommandContext& ctx) override 
+        {
+            wrapped_cmd_->execute(ctx);
+        }
+    private:
+        ICommandPtr_t wrapped_cmd_;
+    };
+
+    /// @brief Реализация декоратора для сохранения времени создания команды
+    class CommandWithLogTime : public CommandDecorator 
+    {
+    public:
+        time_t created_at_ = std::time(nullptr);
+        CommandWithLogTime(ICommandPtr_t wraped_cmd) : CommandDecorator(std::move(wraped_cmd)) {}
+        virtual void execute(ICommandContext& ctx) override 
+        {
+            CommandDecorator::execute(ctx);
+            ctx.cmd_created_at_ = created_at_;
+        }
+    };
+
+    /// @brief Конкретная фабрика команд
+    class CommandCreator : public ICommandCreator
+    {
+    public:
+        virtual ICommandPtr_t create_command(const command_data_t&  cmd) const override 
+        { 
+            return ICommandPtr_t{new CommandWithLogTime{ICommandPtr_t{new SimpleCommand(cmd)}}}; 
+        }
+    };
+
     IInputParser::Status   InputParser::read_next_bulk(ICommandQueue& cmd_queue)
     {
 		Status st{};
+        if( !cmd_queue.size() )
+            cmd_queue.created_at_ = std::time(nullptr); 
+
         for(bool end_of_work = false; !end_of_work;)
         {
             ICommandPtr_t cmd;
@@ -177,26 +233,93 @@ namespace otus_hw7{
         return true;
     }
 
+    /// @brief Реализация исполнителя очереди и в нем же пока исполнитель команд
     class QueueExecutor : public IQueueExecutor
     {
     public:    
         QueueExecutor()  { }
-        void execute(ICommandQueue& q, ICommandContext& ctx) override;
+        virtual void execute(ICommandQueue& q, ICommandExecutor& cmd_executor, ICommandContext& ctx) override;
     };
 
-    void QueueExecutor::execute(ICommandQueue& q, ICommandContext& ctx)
+    /// @brief Реализация исполнителя команд
+    class CommandExecutor : public ICommandExecutor
+    {
+    public:    
+        CommandExecutor()  { }
+        virtual void execute_cmd(ICommand& cmd, ICommandContext& ctx) override
+        {
+            cmd.execute(ctx);
+        }
+    };
+
+    void QueueExecutor::execute(ICommandQueue& q, ICommandExecutor& cmd_executor, ICommandContext& ctx)
     {
         ICommandPtr_t cmd;
         for( ; q.pop(cmd) ; ++ctx.cmd_idx_)
         {
-            cmd->execute(ctx);
+            cmd_executor.execute_cmd(*cmd, ctx); 
         } 
     }
+
+    class QueueExecutorDecorator : public IQueueExecutor
+    {
+    public:
+        QueueExecutorDecorator(IQueueExecutorPtr_t wrapee) : wrapee_(std::move(wrapee)) {}
+        virtual void execute(ICommandQueue& q, ICommandExecutor& cmd_executor, ICommandContext& ctx) override 
+        {
+            wrapee_->execute(q, cmd_executor, ctx);
+        }
+    private:
+        IQueueExecutorPtr_t wrapee_;
+    };
+
+    class CommandExecutorDecorator : public ICommandExecutor
+    {
+    public:
+        CommandExecutorDecorator(ICommandExecutorPtr_t wrapee) : wrapee_(std::move(wrapee)) {}
+        virtual void execute_cmd(ICommand& c, ICommandContext& ctx) override 
+        {
+            wrapee_->execute_cmd(c, ctx);
+        }
+    private:
+        ICommandExecutorPtr_t wrapee_;
+    };
+
+    /// @brief Реализация декоратора для сохранения времени создания команды
+    class CommandExecutorWithLog : public CommandExecutorDecorator 
+    {
+    public:
+        CommandExecutorWithLog(ICommandExecutorPtr_t wrapee) : CommandExecutorDecorator(std::move(wrapee)) {}
+        virtual void execute_cmd(ICommand& c, ICommandContext& ctx) override 
+        {
+            CommandExecutorDecorator::execute_cmd(c, ctx);
+            init_log(ctx);
+            ICommandContext log_ctx{ctx.bulk_size_, ctx.cmd_idx_, log_};
+            c.execute(log_ctx);
+        }
+    private:
+        std::string get_log_filenm(ICommandContext const& ctx)
+        {
+            std::ostringstream oss;
+            oss << ctx.cmd_created_at_ << ".log";
+            return oss.str();
+        }
+
+        void init_log(ICommandContext const& ctx)
+        {
+            if( log_.is_open() )    return;
+            std::string file_nm = get_log_filenm(ctx);
+            log_.open(file_nm, std::ios_base::out | std::ios_base::ate );
+        }
+
+        std::ofstream log_;
+    };
+
 
     void SimpleCommand::execute(ICommandContext& ctx)
     {
         ctx.os_ << (!ctx.cmd_idx_ ? "bulk: ": ", ") << cmd_; 
-        if( ctx.bulk_cnt_ - ctx.cmd_idx_ < 2 )
+        if( ctx.bulk_size_ - ctx.cmd_idx_ < 2 )
             ctx.os_ << std::endl; 
     }
 
@@ -241,29 +364,40 @@ namespace otus_hw7{
 
     void    Processor::exec_queue( )
     {
-        ctx_->bulk_cnt_ = cmd_queue_->size(); 
+        ctx_->bulk_size_ = cmd_queue_->size(); 
         ctx_->cmd_idx_ = 0;
-        
-        executor_->execute(*cmd_queue_, *ctx_);
+        ICommandExecutorPtr_t cmd_executor{ new CommandExecutorWithLog(ICommandExecutorPtr_t{ new CommandExecutor() }) };
+        executor_->execute(*cmd_queue_, *cmd_executor, *ctx_);
     }
 
-    IProcessorPtr_t create_processor(Options& options)
-    {
-        return IProcessorPtr_t{new Processor(create_parser(options), create_command_queue(), create_queue_executor() ) };
-    }
-    
+    /// @brief Фабрика для парсера. Опции нужны для выбора типа парсера
+    /// @param options 
+    /// @return 
     IInputParserPtr_t create_parser(Options& options)
     {
-        return IInputParserPtr_t{ new InputParser(options.cmd_chunk_sz, std::cin) };
+        return IInputParserPtr_t{ new InputParser(options.cmd_chunk_sz, std::cin, ICommandCreatorPtr_t(new CommandCreator)) };
     }
     
+    /// @brief Фабрика очереди команд
+    /// @return Указатель на абстрактный интерфейс очереди команд 
     ICommandQueuePtr_t create_command_queue()
     {
         return ICommandQueuePtr_t{ new CommandQueue };
     }
 
+    /// @brief Фабрика исполнителя очереди команд
+    /// @return Указатель на созданный интерфейс
     IQueueExecutorPtr_t create_queue_executor()
     {
-        return IQueueExecutorPtr_t{ new QueueExecutor() };
+        return  IQueueExecutorPtr_t{  new QueueExecutor() };
     }
+
+    /// @brief  Фабрика для процессора, сама по настройкам выбирает какой тип процессора создать
+    /// @param options 
+    /// @return Интерфейс созданного объекта  
+    IProcessorPtr_t create_processor(Options& options)
+    {
+        return IProcessorPtr_t{new Processor(create_parser(options), create_command_queue(), create_queue_executor() ) };
+    }
+    
 };

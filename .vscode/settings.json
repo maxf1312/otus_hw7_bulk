@@ -66,6 +66,7 @@
         "variant": "cpp",
         "bitset": "cpp",
         "complex": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "fstream": "cpp"
     }
 }
