@@ -1,0 +1,7 @@
+<map id="otus_hw7::ICommand" name="otus_hw7::ICommand">
+<area shape="rect" id="Node000001" title="Команда, активный объект, паттерн команда" alt="" coords="138,5,284,31"/>
+<area shape="rect" id="Node000002" href="$classotus__hw7_1_1CommandDecorator.html" title="Реализация команды&#45;декоратора" alt="" coords="5,79,204,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,42,124,81,121,76,179,38"/>
+<area shape="rect" id="Node000003" href="$classotus__hw7_1_1SimpleCommand.html" title="Реализация простой команды, выводящей себя в поток" alt="" coords="228,79,410,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,38,302,76,299,81,241,42"/>
+</map>

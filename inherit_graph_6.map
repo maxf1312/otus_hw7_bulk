@@ -1,0 +1,5 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$structotus__hw7_1_1IProcessor.html" title="Процессор &#45; управляющий обработкой посредник" alt="" coords="5,5,152,31"/>
+<area shape="rect" id="Node000001" href="$classotus__hw7_1_1Processor.html" title="Реализация процессора команд" alt="" coords="200,5,342,31"/>
+<area shape="poly" id="edge9_Node000000_Node000001" title=" " alt="" coords="167,16,199,16,199,21,167,21"/>
+</map>

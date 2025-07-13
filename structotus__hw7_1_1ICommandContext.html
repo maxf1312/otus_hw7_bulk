@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bulk: Структура otus_hw7::ICommandContext</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bulk<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">bulk utility made for homework 7</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceotus__hw7.html">otus_hw7</a></li><li class="navelem"><a class="el" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-attribs">Открытые атрибуты</a> &#124;
+<a href="structotus__hw7_1_1ICommandContext-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Структура otus_hw7::ICommandContext</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Контекст выполнения команды  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="bulk_8h_source.html">bulk.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:affdec518070ad784e604fe68bc26dc5e" id="r_affdec518070ad784e604fe68bc26dc5e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affdec518070ad784e604fe68bc26dc5e">~ICommandContext</a> ()=default</td></tr>
+<tr class="separator:affdec518070ad784e604fe68bc26dc5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3146f88c81000b10ea31095e658b50cf" id="r_a3146f88c81000b10ea31095e658b50cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3146f88c81000b10ea31095e658b50cf">ICommandContext</a> (size_t bulk_size, size_t cmd_idx, ostream &amp;os, time_t cmd_created_at)</td></tr>
+<tr class="separator:a3146f88c81000b10ea31095e658b50cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Открытые атрибуты</h2></td></tr>
+<tr class="memitem:a0d5609fe4b965496adbe0b0e8c13877c" id="r_a0d5609fe4b965496adbe0b0e8c13877c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d5609fe4b965496adbe0b0e8c13877c">bulk_size_</a></td></tr>
+<tr class="separator:a0d5609fe4b965496adbe0b0e8c13877c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aad95a12c3da55ce1e1ba5d31d698f8" id="r_a2aad95a12c3da55ce1e1ba5d31d698f8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2aad95a12c3da55ce1e1ba5d31d698f8">cmd_idx_</a></td></tr>
+<tr class="separator:a2aad95a12c3da55ce1e1ba5d31d698f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a232952ea085617d58013012f6c9238d2" id="r_a232952ea085617d58013012f6c9238d2"><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a232952ea085617d58013012f6c9238d2">os_</a></td></tr>
+<tr class="separator:a232952ea085617d58013012f6c9238d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfb917c6d1b4c45d82d2804759742f89" id="r_abfb917c6d1b4c45d82d2804759742f89"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfb917c6d1b4c45d82d2804759742f89">cmd_created_at_</a></td></tr>
+<tr class="separator:abfb917c6d1b4c45d82d2804759742f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Контекст выполнения команды </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="affdec518070ad784e604fe68bc26dc5e" name="affdec518070ad784e604fe68bc26dc5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affdec518070ad784e604fe68bc26dc5e">&#9670;&#160;</a></span>~ICommandContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual otus_hw7::ICommandContext::~ICommandContext </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3146f88c81000b10ea31095e658b50cf" name="a3146f88c81000b10ea31095e658b50cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3146f88c81000b10ea31095e658b50cf">&#9670;&#160;</a></span>ICommandContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">otus_hw7::ICommandContext::ICommandContext </td>
+          <td>(</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>bulk_size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>cmd_idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">time_t</td>          <td class="paramname"><span class="paramname"><em>cmd_created_at</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a id="a0d5609fe4b965496adbe0b0e8c13877c" name="a0d5609fe4b965496adbe0b0e8c13877c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d5609fe4b965496adbe0b0e8c13877c">&#9670;&#160;</a></span>bulk_size_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t otus_hw7::ICommandContext::bulk_size_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abfb917c6d1b4c45d82d2804759742f89" name="abfb917c6d1b4c45d82d2804759742f89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfb917c6d1b4c45d82d2804759742f89">&#9670;&#160;</a></span>cmd_created_at_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t otus_hw7::ICommandContext::cmd_created_at_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2aad95a12c3da55ce1e1ba5d31d698f8" name="a2aad95a12c3da55ce1e1ba5d31d698f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aad95a12c3da55ce1e1ba5d31d698f8">&#9670;&#160;</a></span>cmd_idx_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t otus_hw7::ICommandContext::cmd_idx_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a232952ea085617d58013012f6c9238d2" name="a232952ea085617d58013012f6c9238d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a232952ea085617d58013012f6c9238d2">&#9670;&#160;</a></span>os_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ostream&amp; otus_hw7::ICommandContext::os_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов структуры находятся в файле:<ul>
+<li><a class="el" href="bulk_8h_source.html">bulk.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

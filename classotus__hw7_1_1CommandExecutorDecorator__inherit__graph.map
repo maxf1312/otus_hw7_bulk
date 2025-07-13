@@ -1,0 +1,7 @@
+<map id="otus_hw7::CommandExecutorDecorator" name="otus_hw7::CommandExecutorDecorator">
+<area shape="rect" id="Node000001" title="Декоратор для исполнителя команд" alt="" coords="7,79,200,120"/>
+<area shape="rect" id="Node000003" href="$classotus__hw7_1_1CommandExecutorWithLog.html" title="Реализация декоратора для сохранения команды в файл" alt="" coords="7,168,200,208"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="106,135,106,167,101,167,101,135"/>
+<area shape="rect" id="Node000002" href="$structotus__hw7_1_1ICommandExecutor.html" title="Актор, выполняющий команду" alt="" coords="5,5,202,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,46,106,79,101,79,101,46"/>
+</map>

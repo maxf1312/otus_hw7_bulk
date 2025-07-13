@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bulk: Исходный файл bulk.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bulk<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">bulk utility made for homework 7</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bulk.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bulk_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;ctime&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceotus__hw7.html">otus_hw7</a>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">using </span>std::istream;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">using </span>std::ostream;</div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1Options.html">   13</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1Options.html">Options</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1Options.html#a39d415467458851ddf61c21391ef5eb6">   15</a></span>        <span class="keywordtype">bool</span>   <a class="code hl_variable" href="structotus__hw7_1_1Options.html#a39d415467458851ddf61c21391ef5eb6">show_help</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1Options.html#afa6cd8c6e63b14e339344240f26e5fea">   16</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structotus__hw7_1_1Options.html#afa6cd8c6e63b14e339344240f26e5fea">cmd_chunk_sz</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    };</div>
+</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceotus__hw7.html#a7a1d077b7590f8e4fe5fcd7ae104ff2d">parse_command_line</a>(<span class="keywordtype">int</span> argc, <span class="keyword">const</span> <span class="keywordtype">char</span>* argv[], <a class="code hl_struct" href="structotus__hw7_1_1Options.html">Options</a>&amp; parsed_options);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1IQueueExecutor.html">IQueueExecutor</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommandExecutor.html">ICommandExecutor</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1IInputParser.html">IInputParser</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommand.html">ICommand</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommandQueue.html">ICommandQueue</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1IProcessor.html">IProcessor</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#ae5ea9f68b32f3778551b0f233441d329">   29</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#ae5ea9f68b32f3778551b0f233441d329">IQueueExecutorPtr_t</a> = std::unique_ptr&lt;IQueueExecutor&gt;;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#ade135ec7bbc8e85f8ab47e4bc738bbbe">   30</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#ade135ec7bbc8e85f8ab47e4bc738bbbe">ICommandExecutorPtr_t</a> = std::unique_ptr&lt;ICommandExecutor&gt;;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#ad99bb3540faa8719e73ee68f17cf9f5a">   31</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#ad99bb3540faa8719e73ee68f17cf9f5a">IInputParserPtr_t</a> = std::unique_ptr&lt;IInputParser&gt;;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#aa16573828369e82eba65b4848d69216d">   32</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#aa16573828369e82eba65b4848d69216d">ICommandPtr_t</a> = std::unique_ptr&lt;ICommand&gt;;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#a1bdd179de1d3a51e70a26109ac357be1">   33</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#a1bdd179de1d3a51e70a26109ac357be1">ICommandQueuePtr_t</a> = std::unique_ptr&lt;ICommandQueue&gt;;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#aa7f86a27801044b4e45589f182119e99">   34</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#aa7f86a27801044b4e45589f182119e99">IProcessorPtr_t</a> = std::unique_ptr&lt;IProcessor&gt;;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespaceotus__hw7.html#a9dab97c1ed1210071166762405fc95e9">   35</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespaceotus__hw7.html#a9dab97c1ed1210071166762405fc95e9">ICommandContextPtr_t</a> = std::unique_ptr&lt;ICommandContext&gt;;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">//---------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="};">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html">   41</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1IInputParser.html">IInputParser</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {</div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86">   44</a></span>        <span class="keyword">enum class</span> <a class="code hl_enumeration" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86">Status</a> : uint8_t</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a119b95f1855d21488205f47929028dac">   46</a></span>            <a class="code hl_enumvalue" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a119b95f1855d21488205f47929028dac">kReading</a>,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a25d5606fe07425ea73f245c48612c039">   47</a></span>            <a class="code hl_enumvalue" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a25d5606fe07425ea73f245c48612c039">kReady</a>,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86aa7c4e68b845afc4ee4dcaf41b0b503e4">   48</a></span>            <a class="code hl_enumvalue" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86aa7c4e68b845afc4ee4dcaf41b0b503e4">kIgnore</a>,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a97bebae73e3334ef0c946c5df81e440b">   49</a></span>            <a class="code hl_enumvalue" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a97bebae73e3334ef0c946c5df81e440b">kStop</a></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        };</div>
+</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#a9ef051986b4c09eea3df66b33edc8b04">   51</a></span>        <span class="keyword">virtual</span>          <a class="code hl_function" href="structotus__hw7_1_1IInputParser.html#a9ef051986b4c09eea3df66b33edc8b04">~IInputParser</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#ab897bdafe0a5ba83fa5a82d3f460a3a4">   52</a></span>        <span class="keyword">virtual</span> <a class="code hl_enumeration" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86">Status</a>   <a class="code hl_function" href="structotus__hw7_1_1IInputParser.html#ab897bdafe0a5ba83fa5a82d3f460a3a4">read_next_command</a>(<a class="code hl_typedef" href="namespaceotus__hw7.html#aa16573828369e82eba65b4848d69216d">ICommandPtr_t</a>&amp; cmd) = 0;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IInputParser.html#ad132fab9a6ef6975a9c913068b5b2c1f">   53</a></span>        <span class="keyword">virtual</span> <a class="code hl_enumeration" href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86">Status</a>   <a class="code hl_function" href="structotus__hw7_1_1IInputParser.html#ad132fab9a6ef6975a9c913068b5b2c1f">read_next_bulk</a>(<a class="code hl_struct" href="structotus__hw7_1_1ICommandQueue.html">ICommandQueue</a>&amp; cmd_queue) = 0;        </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="};">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html">   57</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommandQueue.html">ICommandQueue</a></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html#abffe22f598eb7eada2f4ef3a1e046266">   59</a></span>        time_t   <a class="code hl_variable" href="structotus__hw7_1_1ICommandQueue.html#abffe22f598eb7eada2f4ef3a1e046266">created_at_</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html#a424fd05daa59ffe19b8ffce197fce9c1">   60</a></span>        <span class="keyword">virtual</span>  <a class="code hl_function" href="structotus__hw7_1_1ICommandQueue.html#a424fd05daa59ffe19b8ffce197fce9c1">~ICommandQueue</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html#a10fc12dcd0a67af85de0243353aa6a97">   62</a></span>        <span class="keyword">virtual</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="structotus__hw7_1_1ICommandQueue.html#a10fc12dcd0a67af85de0243353aa6a97">push</a>(<a class="code hl_typedef" href="namespaceotus__hw7.html#aa16573828369e82eba65b4848d69216d">ICommandPtr_t</a> cmd) = 0;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html#a59c152652dc831faab53de94c2e26fc7">   63</a></span>        <span class="keyword">virtual</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="structotus__hw7_1_1ICommandQueue.html#a59c152652dc831faab53de94c2e26fc7">pop</a>(<a class="code hl_typedef" href="namespaceotus__hw7.html#aa16573828369e82eba65b4848d69216d">ICommandPtr_t</a>&amp; cmd) = 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html#a3216109213f33d0d42fe2d37dfdc420f">   64</a></span>        <span class="keyword">virtual</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="structotus__hw7_1_1ICommandQueue.html#a3216109213f33d0d42fe2d37dfdc420f">reset</a>() = 0;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandQueue.html#aa881fcc10af0934d63327e7941fb0637">   65</a></span>        <span class="keyword">virtual</span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="structotus__hw7_1_1ICommandQueue.html#aa881fcc10af0934d63327e7941fb0637">size</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    };</div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="};">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommand.html">   69</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommand.html">ICommand</a></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommand.html#a2c11686acb4b3eba7a26d5858cb7734d">   71</a></span>        <span class="keyword">virtual</span>      <a class="code hl_function" href="structotus__hw7_1_1ICommand.html#a2c11686acb4b3eba7a26d5858cb7734d">~ICommand</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommand.html#ac0f10255f3500b4edf341bb75d421aa0">   72</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structotus__hw7_1_1ICommand.html#ac0f10255f3500b4edf341bb75d421aa0">execute</a>(<a class="code hl_struct" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a>&amp; ctx) = 0;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    };</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="};">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandExecutor.html">   76</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1ICommandExecutor.html">ICommandExecutor</a></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandExecutor.html#a665c312cc2db007fe8490befac6c9c99">   78</a></span>        <span class="keyword">virtual</span>      <a class="code hl_function" href="structotus__hw7_1_1ICommandExecutor.html#a665c312cc2db007fe8490befac6c9c99">~ICommandExecutor</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandExecutor.html#a7deb535a747d85869b70ebf6d4ccfcb3">   79</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structotus__hw7_1_1ICommandExecutor.html#a7deb535a747d85869b70ebf6d4ccfcb3">execute_cmd</a>(<a class="code hl_struct" href="structotus__hw7_1_1ICommand.html">ICommand</a>&amp; cmd, <a class="code hl_struct" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a>&amp; ctx) = 0;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    };</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="};">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IQueueExecutor.html">   83</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1IQueueExecutor.html">IQueueExecutor</a></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IQueueExecutor.html#ab63fbb50fe87b89d3be320cd290878a4">   85</a></span>        <span class="keyword">virtual</span>      <a class="code hl_function" href="structotus__hw7_1_1IQueueExecutor.html#ab63fbb50fe87b89d3be320cd290878a4">~IQueueExecutor</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IQueueExecutor.html#a4d7356b4d344aaf5ca372386741537e4">   86</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structotus__hw7_1_1IQueueExecutor.html#a4d7356b4d344aaf5ca372386741537e4">execute</a>(<a class="code hl_struct" href="structotus__hw7_1_1ICommandQueue.html">ICommandQueue</a>&amp; cmd_q, <a class="code hl_struct" href="structotus__hw7_1_1ICommandExecutor.html">ICommandExecutor</a>&amp; cmd_executor, <a class="code hl_struct" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a>&amp; ctx) = 0;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    };</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span></div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="};">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandContext.html">   90</a></span>    <span class="keyword">struct </span><a class="code hl_function" href="structotus__hw7_1_1ICommandContext.html#a3146f88c81000b10ea31095e658b50cf">ICommandContext</a></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandContext.html#a0d5609fe4b965496adbe0b0e8c13877c">   92</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#a0d5609fe4b965496adbe0b0e8c13877c">bulk_size_</a>, <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#a2aad95a12c3da55ce1e1ba5d31d698f8">cmd_idx_</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandContext.html#a232952ea085617d58013012f6c9238d2">   93</a></span>        ostream&amp; <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#a232952ea085617d58013012f6c9238d2">os_</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandContext.html#abfb917c6d1b4c45d82d2804759742f89">   94</a></span>        time_t <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#abfb917c6d1b4c45d82d2804759742f89">cmd_created_at_</a>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandContext.html#affdec518070ad784e604fe68bc26dc5e">   96</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="structotus__hw7_1_1ICommandContext.html#affdec518070ad784e604fe68bc26dc5e">~ICommandContext</a>() = <span class="keywordflow">default</span>; </div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1ICommandContext.html#a3146f88c81000b10ea31095e658b50cf">   97</a></span>        <a class="code hl_function" href="structotus__hw7_1_1ICommandContext.html#a3146f88c81000b10ea31095e658b50cf">ICommandContext</a>(<span class="keywordtype">size_t</span> bulk_size, <span class="keywordtype">size_t</span> cmd_idx, ostream&amp; os, time_t cmd_created_at) </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            : <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#a0d5609fe4b965496adbe0b0e8c13877c">bulk_size_</a>(bulk_size), <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#a2aad95a12c3da55ce1e1ba5d31d698f8">cmd_idx_</a>(cmd_idx), <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#a232952ea085617d58013012f6c9238d2">os_</a>(os), <a class="code hl_variable" href="structotus__hw7_1_1ICommandContext.html#abfb917c6d1b4c45d82d2804759742f89">cmd_created_at_</a>(cmd_created_at) {}</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    };</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="};">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IProcessor.html">  102</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structotus__hw7_1_1IProcessor.html">IProcessor</a></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IProcessor.html#a0da92267d754e90bdbd68caca680fc4c">  104</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="structotus__hw7_1_1IProcessor.html#a0da92267d754e90bdbd68caca680fc4c">~IProcessor</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structotus__hw7_1_1IProcessor.html#ac6c950fe5bf049eff10248b6c0c8d143">  105</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structotus__hw7_1_1IProcessor.html#ac6c950fe5bf049eff10248b6c0c8d143">process</a>() = 0;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    };</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_typedef" href="namespaceotus__hw7.html#aa7f86a27801044b4e45589f182119e99">IProcessorPtr_t</a> <a class="code hl_function" href="namespaceotus__hw7.html#af931e0fc88b5caf4771c0751edf1d0b1">create_processor</a>(<a class="code hl_struct" href="structotus__hw7_1_1Options.html">Options</a>&amp; options);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>} <span class="comment">// otus_hw7</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="ttc" id="anamespaceotus__hw7_html"><div class="ttname"><a href="namespaceotus__hw7.html">otus_hw7</a></div><div class="ttdef"><b>Определения</b> bulk.cpp:9</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_a1bdd179de1d3a51e70a26109ac357be1"><div class="ttname"><a href="namespaceotus__hw7.html#a1bdd179de1d3a51e70a26109ac357be1">otus_hw7::ICommandQueuePtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; ICommandQueue &gt; ICommandQueuePtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:33</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_a7a1d077b7590f8e4fe5fcd7ae104ff2d"><div class="ttname"><a href="namespaceotus__hw7.html#a7a1d077b7590f8e4fe5fcd7ae104ff2d">otus_hw7::parse_command_line</a></div><div class="ttdeci">bool parse_command_line(int argc, const char *argv[], Options &amp;parsed_options)</div><div class="ttdef"><b>Определения</b> bulk_utils.cpp:13</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_a9dab97c1ed1210071166762405fc95e9"><div class="ttname"><a href="namespaceotus__hw7.html#a9dab97c1ed1210071166762405fc95e9">otus_hw7::ICommandContextPtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; ICommandContext &gt; ICommandContextPtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:35</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_aa16573828369e82eba65b4848d69216d"><div class="ttname"><a href="namespaceotus__hw7.html#aa16573828369e82eba65b4848d69216d">otus_hw7::ICommandPtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; ICommand &gt; ICommandPtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:32</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_aa7f86a27801044b4e45589f182119e99"><div class="ttname"><a href="namespaceotus__hw7.html#aa7f86a27801044b4e45589f182119e99">otus_hw7::IProcessorPtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; IProcessor &gt; IProcessorPtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:34</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_ad99bb3540faa8719e73ee68f17cf9f5a"><div class="ttname"><a href="namespaceotus__hw7.html#ad99bb3540faa8719e73ee68f17cf9f5a">otus_hw7::IInputParserPtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; IInputParser &gt; IInputParserPtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:31</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_ade135ec7bbc8e85f8ab47e4bc738bbbe"><div class="ttname"><a href="namespaceotus__hw7.html#ade135ec7bbc8e85f8ab47e4bc738bbbe">otus_hw7::ICommandExecutorPtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; ICommandExecutor &gt; ICommandExecutorPtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:30</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_ae5ea9f68b32f3778551b0f233441d329"><div class="ttname"><a href="namespaceotus__hw7.html#ae5ea9f68b32f3778551b0f233441d329">otus_hw7::IQueueExecutorPtr_t</a></div><div class="ttdeci">std::unique_ptr&lt; IQueueExecutor &gt; IQueueExecutorPtr_t</div><div class="ttdef"><b>Определения</b> bulk.h:29</div></div>
+<div class="ttc" id="anamespaceotus__hw7_html_af931e0fc88b5caf4771c0751edf1d0b1"><div class="ttname"><a href="namespaceotus__hw7.html#af931e0fc88b5caf4771c0751edf1d0b1">otus_hw7::create_processor</a></div><div class="ttdeci">IProcessorPtr_t create_processor(Options &amp;options)</div><div class="ttdoc">Фабрика для процессора, сама по настройкам выбирает какой тип процессора создать</div><div class="ttdef"><b>Определения</b> bulk.cpp:198</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html">otus_hw7::ICommandContext</a></div><div class="ttdoc">Контекст выполнения команды</div><div class="ttdef"><b>Определения</b> bulk.h:91</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html_a0d5609fe4b965496adbe0b0e8c13877c"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html#a0d5609fe4b965496adbe0b0e8c13877c">otus_hw7::ICommandContext::bulk_size_</a></div><div class="ttdeci">size_t bulk_size_</div><div class="ttdef"><b>Определения</b> bulk.h:92</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html_a232952ea085617d58013012f6c9238d2"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html#a232952ea085617d58013012f6c9238d2">otus_hw7::ICommandContext::os_</a></div><div class="ttdeci">ostream &amp; os_</div><div class="ttdef"><b>Определения</b> bulk.h:93</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html_a2aad95a12c3da55ce1e1ba5d31d698f8"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html#a2aad95a12c3da55ce1e1ba5d31d698f8">otus_hw7::ICommandContext::cmd_idx_</a></div><div class="ttdeci">size_t cmd_idx_</div><div class="ttdef"><b>Определения</b> bulk.h:92</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html_a3146f88c81000b10ea31095e658b50cf"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html#a3146f88c81000b10ea31095e658b50cf">otus_hw7::ICommandContext::ICommandContext</a></div><div class="ttdeci">ICommandContext(size_t bulk_size, size_t cmd_idx, ostream &amp;os, time_t cmd_created_at)</div><div class="ttdef"><b>Определения</b> bulk.h:97</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html_abfb917c6d1b4c45d82d2804759742f89"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html#abfb917c6d1b4c45d82d2804759742f89">otus_hw7::ICommandContext::cmd_created_at_</a></div><div class="ttdeci">time_t cmd_created_at_</div><div class="ttdef"><b>Определения</b> bulk.h:94</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandContext_html_affdec518070ad784e604fe68bc26dc5e"><div class="ttname"><a href="structotus__hw7_1_1ICommandContext.html#affdec518070ad784e604fe68bc26dc5e">otus_hw7::ICommandContext::~ICommandContext</a></div><div class="ttdeci">virtual ~ICommandContext()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandExecutor_html"><div class="ttname"><a href="structotus__hw7_1_1ICommandExecutor.html">otus_hw7::ICommandExecutor</a></div><div class="ttdoc">Актор, выполняющий команду</div><div class="ttdef"><b>Определения</b> bulk.h:77</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandExecutor_html_a665c312cc2db007fe8490befac6c9c99"><div class="ttname"><a href="structotus__hw7_1_1ICommandExecutor.html#a665c312cc2db007fe8490befac6c9c99">otus_hw7::ICommandExecutor::~ICommandExecutor</a></div><div class="ttdeci">virtual ~ICommandExecutor()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandExecutor_html_a7deb535a747d85869b70ebf6d4ccfcb3"><div class="ttname"><a href="structotus__hw7_1_1ICommandExecutor.html#a7deb535a747d85869b70ebf6d4ccfcb3">otus_hw7::ICommandExecutor::execute_cmd</a></div><div class="ttdeci">virtual void execute_cmd(ICommand &amp;cmd, ICommandContext &amp;ctx)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html">otus_hw7::ICommandQueue</a></div><div class="ttdoc">Очередь команд. Формируется парсером, затем выполняется исполнителем под управлением процессора.</div><div class="ttdef"><b>Определения</b> bulk.h:58</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html_a10fc12dcd0a67af85de0243353aa6a97"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html#a10fc12dcd0a67af85de0243353aa6a97">otus_hw7::ICommandQueue::push</a></div><div class="ttdeci">virtual void push(ICommandPtr_t cmd)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html_a3216109213f33d0d42fe2d37dfdc420f"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html#a3216109213f33d0d42fe2d37dfdc420f">otus_hw7::ICommandQueue::reset</a></div><div class="ttdeci">virtual void reset()=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html_a424fd05daa59ffe19b8ffce197fce9c1"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html#a424fd05daa59ffe19b8ffce197fce9c1">otus_hw7::ICommandQueue::~ICommandQueue</a></div><div class="ttdeci">virtual ~ICommandQueue()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html_a59c152652dc831faab53de94c2e26fc7"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html#a59c152652dc831faab53de94c2e26fc7">otus_hw7::ICommandQueue::pop</a></div><div class="ttdeci">virtual bool pop(ICommandPtr_t &amp;cmd)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html_aa881fcc10af0934d63327e7941fb0637"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html#aa881fcc10af0934d63327e7941fb0637">otus_hw7::ICommandQueue::size</a></div><div class="ttdeci">virtual size_t size() const =0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommandQueue_html_abffe22f598eb7eada2f4ef3a1e046266"><div class="ttname"><a href="structotus__hw7_1_1ICommandQueue.html#abffe22f598eb7eada2f4ef3a1e046266">otus_hw7::ICommandQueue::created_at_</a></div><div class="ttdeci">time_t created_at_</div><div class="ttdef"><b>Определения</b> bulk.h:59</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommand_html"><div class="ttname"><a href="structotus__hw7_1_1ICommand.html">otus_hw7::ICommand</a></div><div class="ttdoc">Команда, активный объект, паттерн команда</div><div class="ttdef"><b>Определения</b> bulk.h:70</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommand_html_a2c11686acb4b3eba7a26d5858cb7734d"><div class="ttname"><a href="structotus__hw7_1_1ICommand.html#a2c11686acb4b3eba7a26d5858cb7734d">otus_hw7::ICommand::~ICommand</a></div><div class="ttdeci">virtual ~ICommand()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1ICommand_html_ac0f10255f3500b4edf341bb75d421aa0"><div class="ttname"><a href="structotus__hw7_1_1ICommand.html#ac0f10255f3500b4edf341bb75d421aa0">otus_hw7::ICommand::execute</a></div><div class="ttdeci">virtual void execute(ICommandContext &amp;ctx)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html">otus_hw7::IInputParser</a></div><div class="ttdoc">Парсер для четния, разбора ввода и формирования пакетов команд. Формирует пакеты, возвращая сразу дан...</div><div class="ttdef"><b>Определения</b> bulk.h:42</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_a8a2d8073f2656c0330752c9e0fbddf86"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86">otus_hw7::IInputParser::Status</a></div><div class="ttdeci">Status</div><div class="ttdoc">Статус чтения ввода и готовности к выполнению</div><div class="ttdef"><b>Определения</b> bulk.h:45</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_a8a2d8073f2656c0330752c9e0fbddf86a119b95f1855d21488205f47929028dac"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a119b95f1855d21488205f47929028dac">otus_hw7::IInputParser::Status::kReading</a></div><div class="ttdeci">@ kReading</div><div class="ttdef"><b>Определения</b> bulk.h:46</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_a8a2d8073f2656c0330752c9e0fbddf86a25d5606fe07425ea73f245c48612c039"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a25d5606fe07425ea73f245c48612c039">otus_hw7::IInputParser::Status::kReady</a></div><div class="ttdeci">@ kReady</div><div class="ttdef"><b>Определения</b> bulk.h:47</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_a8a2d8073f2656c0330752c9e0fbddf86a97bebae73e3334ef0c946c5df81e440b"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86a97bebae73e3334ef0c946c5df81e440b">otus_hw7::IInputParser::Status::kStop</a></div><div class="ttdeci">@ kStop</div><div class="ttdef"><b>Определения</b> bulk.h:49</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_a8a2d8073f2656c0330752c9e0fbddf86aa7c4e68b845afc4ee4dcaf41b0b503e4"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#a8a2d8073f2656c0330752c9e0fbddf86aa7c4e68b845afc4ee4dcaf41b0b503e4">otus_hw7::IInputParser::Status::kIgnore</a></div><div class="ttdeci">@ kIgnore</div><div class="ttdef"><b>Определения</b> bulk.h:48</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_a9ef051986b4c09eea3df66b33edc8b04"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#a9ef051986b4c09eea3df66b33edc8b04">otus_hw7::IInputParser::~IInputParser</a></div><div class="ttdeci">virtual ~IInputParser()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_ab897bdafe0a5ba83fa5a82d3f460a3a4"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#ab897bdafe0a5ba83fa5a82d3f460a3a4">otus_hw7::IInputParser::read_next_command</a></div><div class="ttdeci">virtual Status read_next_command(ICommandPtr_t &amp;cmd)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IInputParser_html_ad132fab9a6ef6975a9c913068b5b2c1f"><div class="ttname"><a href="structotus__hw7_1_1IInputParser.html#ad132fab9a6ef6975a9c913068b5b2c1f">otus_hw7::IInputParser::read_next_bulk</a></div><div class="ttdeci">virtual Status read_next_bulk(ICommandQueue &amp;cmd_queue)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IProcessor_html"><div class="ttname"><a href="structotus__hw7_1_1IProcessor.html">otus_hw7::IProcessor</a></div><div class="ttdoc">Процессор - управляющий обработкой посредник</div><div class="ttdef"><b>Определения</b> bulk.h:103</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IProcessor_html_a0da92267d754e90bdbd68caca680fc4c"><div class="ttname"><a href="structotus__hw7_1_1IProcessor.html#a0da92267d754e90bdbd68caca680fc4c">otus_hw7::IProcessor::~IProcessor</a></div><div class="ttdeci">virtual ~IProcessor()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IProcessor_html_ac6c950fe5bf049eff10248b6c0c8d143"><div class="ttname"><a href="structotus__hw7_1_1IProcessor.html#ac6c950fe5bf049eff10248b6c0c8d143">otus_hw7::IProcessor::process</a></div><div class="ttdeci">virtual void process()=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IQueueExecutor_html"><div class="ttname"><a href="structotus__hw7_1_1IQueueExecutor.html">otus_hw7::IQueueExecutor</a></div><div class="ttdoc">Актор, выполняющий очередь</div><div class="ttdef"><b>Определения</b> bulk.h:84</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IQueueExecutor_html_a4d7356b4d344aaf5ca372386741537e4"><div class="ttname"><a href="structotus__hw7_1_1IQueueExecutor.html#a4d7356b4d344aaf5ca372386741537e4">otus_hw7::IQueueExecutor::execute</a></div><div class="ttdeci">virtual void execute(ICommandQueue &amp;cmd_q, ICommandExecutor &amp;cmd_executor, ICommandContext &amp;ctx)=0</div></div>
+<div class="ttc" id="astructotus__hw7_1_1IQueueExecutor_html_ab63fbb50fe87b89d3be320cd290878a4"><div class="ttname"><a href="structotus__hw7_1_1IQueueExecutor.html#ab63fbb50fe87b89d3be320cd290878a4">otus_hw7::IQueueExecutor::~IQueueExecutor</a></div><div class="ttdeci">virtual ~IQueueExecutor()=default</div></div>
+<div class="ttc" id="astructotus__hw7_1_1Options_html"><div class="ttname"><a href="structotus__hw7_1_1Options.html">otus_hw7::Options</a></div><div class="ttdef"><b>Определения</b> bulk.h:14</div></div>
+<div class="ttc" id="astructotus__hw7_1_1Options_html_a39d415467458851ddf61c21391ef5eb6"><div class="ttname"><a href="structotus__hw7_1_1Options.html#a39d415467458851ddf61c21391ef5eb6">otus_hw7::Options::show_help</a></div><div class="ttdeci">bool show_help</div><div class="ttdef"><b>Определения</b> bulk.h:15</div></div>
+<div class="ttc" id="astructotus__hw7_1_1Options_html_afa6cd8c6e63b14e339344240f26e5fea"><div class="ttname"><a href="structotus__hw7_1_1Options.html#afa6cd8c6e63b14e339344240f26e5fea">otus_hw7::Options::cmd_chunk_sz</a></div><div class="ttdeci">size_t cmd_chunk_sz</div><div class="ttdef"><b>Определения</b> bulk.h:16</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,7 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$structotus__hw7_1_1ICommand.html" title="Команда, активный объект, паттерн команда" alt="" coords="5,31,152,56"/>
+<area shape="rect" id="Node000001" href="$classotus__hw7_1_1CommandDecorator.html" title="Реализация команды&#45;декоратора" alt="" coords="200,5,398,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="167,31,199,27,200,32,168,36"/>
+<area shape="rect" id="Node000002" href="$classotus__hw7_1_1SimpleCommand.html" title="Реализация простой команды, выводящей себя в поток" alt="" coords="208,55,390,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="168,51,207,55,207,60,167,56"/>
+</map>

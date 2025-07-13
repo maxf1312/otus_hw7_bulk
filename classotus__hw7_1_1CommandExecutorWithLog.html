@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bulk: Класс otus_hw7::CommandExecutorWithLog</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bulk<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">bulk utility made for homework 7</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceotus__hw7.html">otus_hw7</a></li><li class="navelem"><a class="el" href="classotus__hw7_1_1CommandExecutorWithLog.html">CommandExecutorWithLog</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classotus__hw7_1_1CommandExecutorWithLog-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс otus_hw7::CommandExecutorWithLog</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Реализация декоратора для сохранения команды в файл  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="bulk__internal_8h_source.html">bulk_internal.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:otus_hw7::CommandExecutorWithLog:</div>
+<div class="dyncontent">
+<div class="center"><img src="classotus__hw7_1_1CommandExecutorWithLog__inherit__graph.png" border="0" usemap="#aotus__hw7_1_1CommandExecutorWithLog_inherit__map" alt="Inheritance graph"/></div>
+<map name="aotus__hw7_1_1CommandExecutorWithLog_inherit__map" id="aotus__hw7_1_1CommandExecutorWithLog_inherit__map">
+<area shape="rect" title="Реализация декоратора для сохранения команды в файл" alt="" coords="7,168,200,208"/>
+<area shape="rect" href="classotus__hw7_1_1CommandExecutorDecorator.html" title="Декоратор для исполнителя команд" alt="" coords="7,79,200,120"/>
+<area shape="poly" title=" " alt="" coords="106,135,106,167,101,167,101,135"/>
+<area shape="rect" href="structotus__hw7_1_1ICommandExecutor.html" title="Актор, выполняющий команду" alt="" coords="5,5,202,31"/>
+<area shape="poly" title=" " alt="" coords="106,46,106,79,101,79,101,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса otus_hw7::CommandExecutorWithLog:</div>
+<div class="dyncontent">
+<div class="center"><img src="classotus__hw7_1_1CommandExecutorWithLog__coll__graph.png" border="0" usemap="#aotus__hw7_1_1CommandExecutorWithLog_coll__map" alt="Collaboration graph"/></div>
+<map name="aotus__hw7_1_1CommandExecutorWithLog_coll__map" id="aotus__hw7_1_1CommandExecutorWithLog_coll__map">
+<area shape="rect" title="Реализация декоратора для сохранения команды в файл" alt="" coords="7,168,200,208"/>
+<area shape="rect" href="classotus__hw7_1_1CommandExecutorDecorator.html" title="Декоратор для исполнителя команд" alt="" coords="7,79,200,120"/>
+<area shape="poly" title=" " alt="" coords="106,135,106,167,101,167,101,135"/>
+<area shape="rect" href="structotus__hw7_1_1ICommandExecutor.html" title="Актор, выполняющий команду" alt="" coords="5,5,202,31"/>
+<area shape="poly" title=" " alt="" coords="106,46,106,79,101,79,101,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a942511c2cfa066acdac1d1d39ef84138" id="r_a942511c2cfa066acdac1d1d39ef84138"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a942511c2cfa066acdac1d1d39ef84138">CommandExecutorWithLog</a> (<a class="el" href="namespaceotus__hw7.html#ade135ec7bbc8e85f8ab47e4bc738bbbe">ICommandExecutorPtr_t</a> wrapee)</td></tr>
+<tr class="separator:a942511c2cfa066acdac1d1d39ef84138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac579c67516d75af4320890bf6cfd3b53" id="r_ac579c67516d75af4320890bf6cfd3b53"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac579c67516d75af4320890bf6cfd3b53">execute_cmd</a> (<a class="el" href="structotus__hw7_1_1ICommand.html">ICommand</a> &amp;c, <a class="el" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a> &amp;ctx) override</td></tr>
+<tr class="separator:ac579c67516d75af4320890bf6cfd3b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classotus__hw7_1_1CommandExecutorDecorator"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classotus__hw7_1_1CommandExecutorDecorator')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classotus__hw7_1_1CommandExecutorDecorator.html">otus_hw7::CommandExecutorDecorator</a></td></tr>
+<tr class="memitem:ad455104b6b0bd1ce4fd3f03a97911a86 inherit pub_methods_classotus__hw7_1_1CommandExecutorDecorator" id="r_ad455104b6b0bd1ce4fd3f03a97911a86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classotus__hw7_1_1CommandExecutorDecorator.html#ad455104b6b0bd1ce4fd3f03a97911a86">CommandExecutorDecorator</a> (<a class="el" href="namespaceotus__hw7.html#ade135ec7bbc8e85f8ab47e4bc738bbbe">ICommandExecutorPtr_t</a> wrapee)</td></tr>
+<tr class="separator:ad455104b6b0bd1ce4fd3f03a97911a86 inherit pub_methods_classotus__hw7_1_1CommandExecutorDecorator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_structotus__hw7_1_1ICommandExecutor"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structotus__hw7_1_1ICommandExecutor')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="structotus__hw7_1_1ICommandExecutor.html">otus_hw7::ICommandExecutor</a></td></tr>
+<tr class="memitem:a665c312cc2db007fe8490befac6c9c99 inherit pub_methods_structotus__hw7_1_1ICommandExecutor" id="r_a665c312cc2db007fe8490befac6c9c99"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structotus__hw7_1_1ICommandExecutor.html#a665c312cc2db007fe8490befac6c9c99">~ICommandExecutor</a> ()=default</td></tr>
+<tr class="separator:a665c312cc2db007fe8490befac6c9c99 inherit pub_methods_structotus__hw7_1_1ICommandExecutor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Реализация декоратора для сохранения команды в файл </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a942511c2cfa066acdac1d1d39ef84138" name="a942511c2cfa066acdac1d1d39ef84138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a942511c2cfa066acdac1d1d39ef84138">&#9670;&#160;</a></span>CommandExecutorWithLog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">otus_hw7::CommandExecutorWithLog::CommandExecutorWithLog </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceotus__hw7.html#ade135ec7bbc8e85f8ab47e4bc738bbbe">ICommandExecutorPtr_t</a></td>          <td class="paramname"><span class="paramname"><em>wrapee</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="ac579c67516d75af4320890bf6cfd3b53" name="ac579c67516d75af4320890bf6cfd3b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac579c67516d75af4320890bf6cfd3b53">&#9670;&#160;</a></span>execute_cmd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void otus_hw7::CommandExecutorWithLog::execute_cmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structotus__hw7_1_1ICommand.html">ICommand</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structotus__hw7_1_1ICommandContext.html">ICommandContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяет метод предка <a class="el" href="classotus__hw7_1_1CommandExecutorDecorator.html#a48e8fb6d464e0a7008a734d6b0d143ab">otus_hw7::CommandExecutorDecorator</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="bulk__internal_8h_source.html">bulk_internal.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

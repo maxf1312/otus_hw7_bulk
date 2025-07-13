@@ -1,0 +1,7 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$structotus__hw7_1_1IQueueExecutor.html" title="Актор, выполняющий очередь" alt="" coords="5,31,181,56"/>
+<area shape="rect" id="Node000001" href="$classotus__hw7_1_1QueueExecutor.html" title="Реализация исполнителя очереди" alt="" coords="257,5,428,31"/>
+<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="196,30,256,24,256,30,197,36"/>
+<area shape="rect" id="Node000002" href="$classotus__hw7_1_1QueueExecutorDecorator.html" title="Декоратор для исполнителя очереди" alt="" coords="229,55,456,80"/>
+<area shape="poly" id="edge11_Node000000_Node000002" title=" " alt="" coords="197,51,228,54,228,59,196,56"/>
+</map>
