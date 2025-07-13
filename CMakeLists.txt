@@ -81,7 +81,7 @@ endif()
 if(WITH_GTEST)
     find_package(GTest  REQUIRED)
     add_executable(test_versiong test_versiong.cpp)
-    add_executable(test_bulk test_bulk.cpp)
+    add_executable(test_bulk test_bulk.cpp bulk.cpp)
 
     target_compile_definitions(test_bulk PUBLIC -DUSE_DBG_TRACE)
 
